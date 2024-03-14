@@ -40,7 +40,7 @@ function createMetaLink(size, siteConfig, rel, type) {
   var mimeType = imageTypes[(type || 'jpg').toLowerCase()];
   var typeStr = mimeType ? 'type="' + mimeType + '"' : '';
   var sizes = 'sizes="' + size + 'x' + size + '" ';
-  return '<link rel="' + (rel || 'icon') + '" ' + sizes + 'href="' + imageUrl + '" ' + typeStr + ' />';
+  return '<link rel="' + (rel || 'icon') + '" ' + sizes + 'href="' + imageUrl + '" ' + typeStr + '>';
 }
 
 function iconLink(siteConfig) {
