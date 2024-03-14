@@ -34,33 +34,33 @@ exports.responseProcessor = function (req, res) {
   return res;
 };
 
-function createMetaLinks(siteConfig, domainName, mode) {
+function createMetaLink(size, siteConfig, rel, type) {
   var createImageUrl = getCreateImageFn(siteConfig.favicon);
-  var cache = getCache(siteConfig).cache;
+  var imageUrl = createImageUrl('square(' + size + ')', type);
+  var mimeType = imageTypes[(type || 'jpg').toLowerCase()];
+  var typeStr = mimeType ? 'type="' + mimeType + '"' : '';
+  var sizes = 'sizes="' + size + 'x' + size + '" ';
+  return '<link rel="' + (rel || 'icon') + '" ' + sizes + 'href="' + imageUrl + '" ' + typeStr + ' />';
+}
 
-  const iconLink = [createMetaLink(64, 'shortcut icon', 'png')]
-    .concat(sizes.map(function (size) {
-      return createMetaLink(size, 'apple-touch-icon');
+function iconLink(siteConfig) {
+  [createMetaLink(64, siteConfig, 'shortcut icon', 'png')]
+    .concat(sizes.map(function (size, siteConfig) {
+      return createMetaLink(size, siteConfig, 'apple-touch-icon');
     }))
-    .concat(altSizes.map(function (size) {
-      return createMetaLink(size, 'icon', 'png');
+    .concat(altSizes.map(function (size, siteConfig) {
+      return createMetaLink(size, siteConfig, 'icon', 'png');
     }))
     .join('\n');
+}
+
+function createMetaLinks(siteConfig, domainName, mode) {
+  var cache = getCache(siteConfig).cache;
 
   if (mode === "live") {
-    return cache.get('favicon-image-generator-cache-' + domainName, function () {
-      return iconLink;
-    });
+    return cache.get('favicon-image-generator-cache-' + domainName, iconLink(siteConfig));
   } else {
-      return iconLink;
-  }
-
-  function createMetaLink(size, rel, type) {
-    var imageUrl = createImageUrl('square(' + size + ')', type);
-    var mimeType = imageTypes[(type || 'jpg').toLowerCase()];
-    var typeStr = mimeType ? 'type="' + mimeType + '"' : '';
-    var sizes = 'sizes="' + size + 'x' + size + '" ';
-    return '<link rel="' + (rel || 'icon') + '" ' + sizes + 'href="' + imageUrl + '" ' + typeStr + ' />';
+      return iconLink(siteConfig);
   }
 }
 
