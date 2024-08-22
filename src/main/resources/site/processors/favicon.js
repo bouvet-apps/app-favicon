@@ -44,7 +44,7 @@ function createMetaLink(size, siteConfig, rel, type) {
 }
 
 function iconLink(siteConfig) {
-  [createMetaLink(64, siteConfig, 'shortcut icon', 'png')]
+  return [createMetaLink(64, siteConfig, 'shortcut icon', 'png')]
     .concat(sizes.map(function (size, siteConfig) {
       return createMetaLink(size, siteConfig, 'apple-touch-icon');
     }))
@@ -58,9 +58,9 @@ function createMetaLinks(siteConfig, domainName, mode) {
   var cache = getCache(siteConfig).cache;
 
   if (mode === "live") {
-    return cache.get('favicon-image-generator-cache-' + domainName, iconLink(siteConfig));
+    return cache.get('favicon-image-generator-cache-' + domainName, () => iconLink(siteConfig));
   } else {
-      return iconLink(siteConfig);
+    return iconLink(siteConfig);
   }
 }
 
