@@ -15,7 +15,8 @@ var imageTypes = {
 exports.responseProcessor = function (req, res) {
   var siteConfig = portal.getSiteConfig();
   var imageId = siteConfig.favicon;
-  var domainName = req.host
+  var domainName = req.host;
+  const mode = req.mode;
 
   if (!imageId) {
     return res;
@@ -28,31 +29,38 @@ exports.responseProcessor = function (req, res) {
     res.pageContributions.headEnd = [headEnd];
   }
 
-  res.pageContributions.headEnd.push(createMetaLinks(siteConfig, domainName));
+  res.pageContributions.headEnd.push(createMetaLinks(siteConfig, domainName, mode));
 
   return res;
 };
 
-function createMetaLinks(siteConfig, domainName) {
+function createMetaLink(size, siteConfig, rel, type) {
   var createImageUrl = getCreateImageFn(siteConfig.favicon);
-  var cache = getCache(siteConfig).cache;
-  return cache.get('favicon-image-generator-cache-' + domainName, function () {
-    return [createMetaLink(64, 'shortcut icon', 'png')]
-      .concat(sizes.map(function (size) {
-        return createMetaLink(size, 'apple-touch-icon');
-      }))
-      .concat(altSizes.map(function (size) {
-        return createMetaLink(size, 'icon', 'png');
-      }))
-      .join('\n');
-  });
+  var imageUrl = createImageUrl('square(' + size + ')', type);
+  var mimeType = imageTypes[(type || 'jpg').toLowerCase()];
+  var typeStr = mimeType ? 'type="' + mimeType + '"' : '';
+  var sizes = 'sizes="' + size + 'x' + size + '" ';
+  return '<link rel="' + (rel || 'icon') + '" ' + sizes + 'href="' + imageUrl + '" ' + typeStr + '>';
+}
 
-  function createMetaLink(size, rel, type) {
-    var imageUrl = createImageUrl('square(' + size + ')', type);
-    var mimeType = imageTypes[(type || 'jpg').toLowerCase()];
-    var typeStr = mimeType ? 'type="' + mimeType + '"' : '';
-    var sizes = 'sizes="' + size + 'x' + size + '" ';
-    return '<link rel="' + (rel || 'icon') + '" ' + sizes + 'href="' + imageUrl + '" ' + typeStr + ' />';
+function iconLink(siteConfig) {
+  return [createMetaLink(64, siteConfig, 'shortcut icon', 'png')]
+    .concat(sizes.map(function (size, siteConfig) {
+      return createMetaLink(size, siteConfig, 'apple-touch-icon');
+    }))
+    .concat(altSizes.map(function (size, siteConfig) {
+      return createMetaLink(size, siteConfig, 'icon', 'png');
+    }))
+    .join('\n');
+}
+
+function createMetaLinks(siteConfig, domainName, mode) {
+  var cache = getCache(siteConfig).cache;
+
+  if (mode === "live") {
+    return cache.get('favicon-image-generator-cache-' + domainName, () => iconLink(siteConfig));
+  } else {
+    return iconLink(siteConfig);
   }
 }
 
