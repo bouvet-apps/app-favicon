@@ -45,12 +45,8 @@ function createMetaLink(size, siteConfig, rel, type) {
 
 function iconLink(siteConfig) {
   return [createMetaLink(64, siteConfig, 'shortcut icon', 'png')]
-    .concat(sizes.map(function (size, siteConfig) {
-      return createMetaLink(size, siteConfig, 'apple-touch-icon');
-    }))
-    .concat(altSizes.map(function (size, siteConfig) {
-      return createMetaLink(size, siteConfig, 'icon', 'png');
-    }))
+    .concat(sizes.map(size => createMetaLink(size, siteConfig, 'apple-touch-icon')))
+    .concat(altSizes.map(size => createMetaLink(size, siteConfig, 'icon', 'png')))
     .join('\n');
 }
 
