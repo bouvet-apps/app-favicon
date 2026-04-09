@@ -1,7 +1,7 @@
 plugins {
     id 'maven-publish'
     id 'java'
-    id 'com.enonic.xp.app' version '3.4.0'
+    id 'com.enonic.xp.app' version '3.6.0'
 }
 
 publishing {
@@ -38,6 +38,6 @@ repositories {
 }
 
 wrapper {
-  gradleVersion = '8.3'
+  gradleVersion = '8.10.2'
   distributionType = Wrapper.DistributionType.BIN
 }
