@@ -9,7 +9,7 @@ Version 2.0.1 has been tested on XP version 7.2
 ## How to use
 
 The application is available through the 
-[Enonic Market](https://market.enonic.com/vendors/selbekk/io.selbekk.favicon).
+[Enonic Market](https://market.enonic.com/vendors/bouvet/favicon).
 This means starting to use this application is easier than the first few levels 
 of Candy Crush.
 
