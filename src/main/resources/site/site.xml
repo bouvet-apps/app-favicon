@@ -14,4 +14,12 @@
     <processors>
         <response-processor name="favicon" order="10"/>
     </processors>
+    <mappings>
+        <mapping controller="/site/controllers/favicon-handler.js" order="50">
+            <pattern>/favicon\.ico</pattern>
+        </mapping>
+        <mapping controller="/site/controllers/favicon-handler.js" order="50">
+            <pattern>/apple-touch-icon.*\.png</pattern>
+        </mapping>
+    </mappings>
 </site>
