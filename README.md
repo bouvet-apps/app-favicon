@@ -42,3 +42,8 @@ change how long the data should be kept in the cache.
 If you want to contribute, please create a pull request. If it's approved,
 you'll get full contributor access, as well as your name on the contributors
 list. We trust you!
+
+## Credits
+
+Originally created by [Kristofer Selbekk](https://github.com/selbekk).
+Now maintained by Bouvet.
