@@ -1,10 +1,11 @@
 # Add a favicon to your Enonic site
 
 Need to add favicons to your Enonic XP site? This is the app for you!
-Updated for Enonic XP 7
+Updated for Enonic XP 8
 
 ## Compatibility
-Version 2.0.1 has been tested on XP version 7.2
+This app is now configured for Enonic XP 8.
+Use Java 17+ when building locally.
 
 ## How to use
 
