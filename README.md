@@ -5,7 +5,7 @@ Updated for Enonic XP 8
 
 ## Compatibility
 This app is now configured for Enonic XP 8.
-Use Java 17+ when building locally.
+Use Java 25 when building locally.
 
 ## How to use
 
