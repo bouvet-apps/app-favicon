@@ -1,7 +1,7 @@
 plugins {
     id 'maven-publish'
     id 'java'
-    id 'com.enonic.xp.app' version '3.4.0'
+    id 'com.enonic.xp.app'
 }
 
 publishing {
@@ -16,29 +16,20 @@ publishing {
     }
 }
 
-app {
-    name = "${appName}"
-    displayName = "${appDisplayName}"
-    vendorName = "Kristofer Selbekk"
-    vendorUrl = "http://www.selbekk.io"
-    systemVersion = "${xpVersion}"
-}
-
 dependencies {
-    implementation "com.enonic.xp:core-api:${xpVersion}"
-    implementation "com.enonic.xp:portal-api:${xpVersion}"
-    include "com.enonic.xp:lib-content:${xpVersion}"
-    include "com.enonic.xp:lib-portal:${xpVersion}"
-    include "com.enonic.lib:lib-cache:2.2.0"
+    implementation xplibs.api.core
+    implementation xplibs.api.portal
+    include xplibs.portal
+    include "com.enonic.lib:lib-cache:3.0.0"
 }
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
     xp.enonicRepo()
 }
 
 wrapper {
-  gradleVersion = '8.3'
+    gradleVersion = '9.4.1'
   distributionType = Wrapper.DistributionType.BIN
 }
