@@ -1,0 +1,14 @@
+kind: "CMS"
+form:
+  - type: "ImageSelector"
+    name: "favicon"
+    label: "Shortcut icon"
+    occurrences:
+      min: 0
+      max: 1
+  - type: "Long"
+    name: "ttl"
+    label: "Favicon image url cache TTL in seconds"
+    occurrences:
+      min: 0
+      max: 1
