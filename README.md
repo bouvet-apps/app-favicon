@@ -1,15 +1,16 @@
 # Add a favicon to your Enonic site
 
 Need to add favicons to your Enonic XP site? This is the app for you!
-Updated for Enonic XP 7
+Updated for Enonic XP 8
 
 ## Compatibility
-Version 2.0.1 has been tested on XP version 7.2
+This app is now configured for Enonic XP 8.
+Use Java 25 when building locally.
 
 ## How to use
 
 The application is available through the 
-[Enonic Market](https://market.enonic.com/vendors/selbekk/io.selbekk.favicon).
+[Enonic Market](https://market.enonic.com/vendors/bouvet/favicon).
 This means starting to use this application is easier than the first few levels 
 of Candy Crush.
 
@@ -41,3 +42,8 @@ change how long the data should be kept in the cache.
 If you want to contribute, please create a pull request. If it's approved,
 you'll get full contributor access, as well as your name on the contributors
 list. We trust you!
+
+## Credits
+
+Originally created by [Kristofer Selbekk](https://github.com/selbekk).
+Now maintained by Bouvet.

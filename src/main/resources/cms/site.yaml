@@ -1,0 +1,11 @@
+kind: "Site"
+processors:
+  - name: "favicon"
+    order: 10
+mappings:
+  - controller: "/cms/controllers/favicon-handler.js"
+    order: 50
+    pattern: "/favicon\\.ico"
+  - controller: "/cms/controllers/favicon-handler.js"
+    order: 50
+    pattern: "/apple-touch-icon.*\\.png"
